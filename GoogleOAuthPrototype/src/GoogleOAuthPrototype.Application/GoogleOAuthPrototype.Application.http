@@ -1,0 +1,6 @@
+@GoogleOAuthPrototype_Application_HostAddress = http://localhost:5080
+
+GET {{GoogleOAuthPrototype_Application_HostAddress}}/health/
+Accept: application/json
+
+###

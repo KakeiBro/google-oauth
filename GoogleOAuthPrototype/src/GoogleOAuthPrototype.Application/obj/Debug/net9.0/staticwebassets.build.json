@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "zopHcPoJIuEsmlBERj9mAN1CdhE6JP/9M2I8Nd8lkmo=",
+  "Source": "GoogleOAuthPrototype.Application",
+  "BasePath": "_content/GoogleOAuthPrototype.Application",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

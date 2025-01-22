@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E23ED1F6-FA14-4810-B9D5-A4F1F6301DB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5E5839A1-B90F-49F0-8F35-C2E67C75D347}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleOAuthPrototype.Application.UnitTests", "test\GoogleOAuthPrototype.Application.UnitTests\GoogleOAuthPrototype.Application.UnitTests.csproj", "{17C76D2B-5EDA-43D0-B5C3-E0C9DD5DA9FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoogleOAuthPrototype.Application", "src\GoogleOAuthPrototype.Application\GoogleOAuthPrototype.Application.csproj", "{039CAA67-0557-4DDA-A9F3-D9A14C45B2BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{17C76D2B-5EDA-43D0-B5C3-E0C9DD5DA9FD} = {5E5839A1-B90F-49F0-8F35-C2E67C75D347}
+		{039CAA67-0557-4DDA-A9F3-D9A14C45B2BB} = {E23ED1F6-FA14-4810-B9D5-A4F1F6301DB3}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17C76D2B-5EDA-43D0-B5C3-E0C9DD5DA9FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17C76D2B-5EDA-43D0-B5C3-E0C9DD5DA9FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17C76D2B-5EDA-43D0-B5C3-E0C9DD5DA9FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17C76D2B-5EDA-43D0-B5C3-E0C9DD5DA9FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{039CAA67-0557-4DDA-A9F3-D9A14C45B2BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039CAA67-0557-4DDA-A9F3-D9A14C45B2BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039CAA67-0557-4DDA-A9F3-D9A14C45B2BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039CAA67-0557-4DDA-A9F3-D9A14C45B2BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
