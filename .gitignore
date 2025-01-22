@@ -56,3 +56,7 @@ desktop.ini
 *.coverage
 *.coveragexml
 _TestResults/
+
+# Sensitive Files
+
+client_secrets.json
