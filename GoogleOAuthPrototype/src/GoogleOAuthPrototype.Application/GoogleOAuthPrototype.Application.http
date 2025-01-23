@@ -4,3 +4,18 @@ GET {{GoogleOAuthPrototype_Application_HostAddress}}/health/
 Accept: application/json
 
 ###
+
+GET {{GoogleOAuthPrototype_Application_HostAddress}}/api/generate-url/
+Accept: application/json
+
+###
+
+GET {{GoogleOAuthPrototype_Application_HostAddress}}/api/google-auth-callback/
+Accept: application/json
+
+###
+
+GET {{GoogleOAuthPrototype_Application_HostAddress}}/api/get-tokens?code=4/0ASVgi3JtRcB8FFj6NCYwcriCvaQ5JnT4Z2HqbyTyh4V3st33pyXSIJVHtNMqqLd2Sn_UBQ
+Accept: application/json
+
+###

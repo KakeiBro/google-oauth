@@ -15,5 +15,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapGet("health", () => Results.Ok(new { Hello = "World" }));
+app.MapGet("api/generate-url", GoogleLogic.GenerateGoogleUrl);
+app.MapGet("api/google-auth-callback", GoogleLogic.GoogleAuthCallback);
+app.MapGet("api/get-tokens", GoogleLogic.GoogleTokensAsync);
 
 app.Run();
