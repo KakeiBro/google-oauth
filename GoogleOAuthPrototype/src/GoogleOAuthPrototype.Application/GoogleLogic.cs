@@ -9,8 +9,8 @@ public static class GoogleLogic
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
     };
 
-    private const string CLIENT_ID = "1066721632069-0s06qo68iq2e9hqupqjih8rnn1buad90.apps.googleusercontent.com";
-    private const string CLIENT_SECRET = "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";
+    private const string CLIENT_ID = "CLIENT_ID";
+    private const string CLIENT_SECRET = "CLIENT_SECRET";
     private const string REDIRECT_URI = "http://localhost:5080/api/google-auth-callback";
     private const string AUTHORIZATION_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
     private const string TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
