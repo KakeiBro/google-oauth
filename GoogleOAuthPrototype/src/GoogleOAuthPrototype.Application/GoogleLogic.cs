@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
 
 namespace GoogleOAuthPrototype.Application;
 
@@ -10,17 +9,23 @@ public static class GoogleLogic
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
     };
 
-    private const string CLIENT_ID = "CLIENT_ID";
-    private const string CLIENT_SECRET = "CLIENT_SECRET";
+    private const string CLIENT_ID = "1066721632069-0s06qo68iq2e9hqupqjih8rnn1buad90.apps.googleusercontent.com";
+    private const string CLIENT_SECRET = "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";
     private const string REDIRECT_URI = "http://localhost:5080/api/google-auth-callback";
     private const string AUTHORIZATION_ENDPOINT = "https://accounts.google.com/o/oauth2/v2/auth";
     private const string TOKEN_ENDPOINT = "https://oauth2.googleapis.com/token";
+    private const string DEFAULT_ACCESS_TYPE = "online";
+    private const string DEFAULT_PROMPT_VALUE = "consent";
+    private const string EMPTY_STRING = "";
 
-    public static IResult GenerateGoogleUrl()
+    public static IResult GenerateGoogleUrl(
+        string accessType = DEFAULT_ACCESS_TYPE, string prompt = DEFAULT_PROMPT_VALUE)
     {
         var authorizationUrl = $"{AUTHORIZATION_ENDPOINT}?client_id={CLIENT_ID}" +
                                $"&redirect_uri={Uri.EscapeDataString(REDIRECT_URI)}" +
-                               $"&response_type=code&scope=openid email profile";
+                               $"&response_type=code&scope=openid email profile" +
+                               $"&access_type={accessType}" +
+                               $"&prompt={prompt}";
         return Results.Ok(new
         {
             Message = $"Visit the following URL to authorize the app: {authorizationUrl}"
@@ -40,12 +45,11 @@ public static class GoogleLogic
         });
     }
 
-    public static async Task<IResult> GoogleTokensAsync(HttpRequest request)
+    public static async Task<IResult> GoogleTokensAsync(string code = EMPTY_STRING)
     {
         using var httpClient = new HttpClient();
 
-        if (!request.Query.TryGetValue("code", out var authCode)
-            || authCode.Count == 0)
+        if (string.IsNullOrWhiteSpace(code))
         {
             return Results.BadRequest(new
             {
@@ -54,7 +58,7 @@ public static class GoogleLogic
         }
 
         var requestContent = new FormUrlEncodedContent([
-            new KeyValuePair<string, string>("code", authCode[0]!),
+            new KeyValuePair<string, string>("code", code),
             new KeyValuePair<string, string>("client_id", CLIENT_ID),
             new KeyValuePair<string, string>("client_secret", CLIENT_SECRET),
             new KeyValuePair<string, string>("redirect_uri", REDIRECT_URI),

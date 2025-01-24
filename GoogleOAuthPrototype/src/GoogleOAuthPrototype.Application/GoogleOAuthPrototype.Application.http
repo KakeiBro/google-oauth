@@ -5,7 +5,7 @@ Accept: application/json
 
 ###
 
-GET {{GoogleOAuthPrototype_Application_HostAddress}}/api/generate-url/
+GET {{GoogleOAuthPrototype_Application_HostAddress}}/api/generate-url?accessType=offline&prompt=consent
 Accept: application/json
 
 ###
@@ -15,7 +15,7 @@ Accept: application/json
 
 ###
 
-GET {{GoogleOAuthPrototype_Application_HostAddress}}/api/get-tokens?code=4/0ASVgi3JtRcB8FFj6NCYwcriCvaQ5JnT4Z2HqbyTyh4V3st33pyXSIJVHtNMqqLd2Sn_UBQ
+GET {{GoogleOAuthPrototype_Application_HostAddress}}/api/get-tokens?code=4/0ASVgi3KGsg-6mMZknCWCjVIBpHe0t-SIsMrsXMR_scKs-CU3k-7vsXoOQIPTB1EcoiTfxQ
 Accept: application/json
 
 ###
