@@ -5,12 +5,13 @@ namespace GoogleOAuthPrototype.Application;
 public static class DependencyInjection
 {
     private const string SecretsSectionName = "web";
+    private const string SecretsFileName = "client_secrets.json";
 
     public static IServiceCollection ConfigureGoogleAuthConfig(
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        var path = Path.Combine(AppContext.BaseDirectory, "Files", "client_secrets.json");
+        var path = Path.Combine(AppContext.BaseDirectory, "Files", SecretsFileName);
         var file = File.ReadAllText(path);
         
         using var document = JsonDocument.Parse(file);

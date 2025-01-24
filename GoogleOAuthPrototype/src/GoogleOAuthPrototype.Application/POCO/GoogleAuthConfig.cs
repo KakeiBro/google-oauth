@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace GoogleOAuthPrototype.Application.POCO;
+﻿namespace GoogleOAuthPrototype.Application.POCO;
 
 public class GoogleAuthConfig
 {
