@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace GoogleOAuthPrototype.Application.Services;
 
@@ -32,8 +33,6 @@ public class GoogleService(IOptions<GoogleAuthConfig> configuration) : IGoogleSe
 
     public async Task<IResult> GoogleTokensAsync(string code)
     {
-        using var httpClient = new HttpClient();
-
         if (string.IsNullOrWhiteSpace(code))
         {
             return Results.BadRequest(new
@@ -41,6 +40,8 @@ public class GoogleService(IOptions<GoogleAuthConfig> configuration) : IGoogleSe
                 Message = "Please provide a valid code"
             });
         }
+
+        using var httpClient = new HttpClient();
 
         var requestContent = new FormUrlEncodedContent([
             new KeyValuePair<string, string>("code", code),
@@ -65,6 +66,33 @@ public class GoogleService(IOptions<GoogleAuthConfig> configuration) : IGoogleSe
             Response = JsonSerializer.Deserialize<TokenResponse>(
                 responseContent, AppSerializationOptions.GoogleConventionOptions),
             RawResponse = responseContent
+        });
+    }
+
+    public async Task<IResult> GetUserDataAsync(HttpRequest request)
+    {
+        var bearerIsPresent = request.Headers.TryGetValue(
+            "Authorization", out var bearerToken);
+        if (!bearerIsPresent || string.IsNullOrWhiteSpace(bearerToken))
+        {
+            return Results.BadRequest(new
+            {
+                Message = "Invalid token"
+            });
+        }
+
+        using var httpClient = new HttpClient();
+        httpClient.DefaultRequestHeaders.Add("Authorization", bearerToken[0]);
+
+        var response = await httpClient.GetAsync(GoogleSettings.USER_INFO_ENDPOINT);
+
+        var profileResponse = JsonSerializer.Deserialize<UserInfo>(
+            await response.Content.ReadAsStringAsync(),
+            AppSerializationOptions.GoogleConventionOptions);
+
+        return Results.Ok(new
+        {
+            ProfileResponse = profileResponse
         });
     }
 }

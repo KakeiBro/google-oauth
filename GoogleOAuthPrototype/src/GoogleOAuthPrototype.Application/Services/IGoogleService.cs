@@ -9,4 +9,6 @@ public interface IGoogleService
     IResult GoogleAuthCallback(HttpRequest request);
 
     Task<IResult> GoogleTokensAsync(string code = GoogleSettings.EMPTY_STRING);
+    
+    Task<IResult> GetUserDataAsync(HttpRequest request);
 }

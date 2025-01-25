@@ -26,5 +26,7 @@ app.MapGet("api/generate-url",
 app.MapGet("api/google-auth-callback",
     (HttpRequest request, IGoogleService service) => service.GoogleAuthCallback(request));
 app.MapGet("api/get-tokens", async (string code, IGoogleService service) => await service.GoogleTokensAsync(code));
+app.MapGet("api/get-user-data",
+    async (HttpRequest request, IGoogleService service) => await service.GetUserDataAsync(request));
 
 app.Run();
