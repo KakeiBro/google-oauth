@@ -95,4 +95,37 @@ public class GoogleService(IOptions<GoogleAuthConfig> configuration) : IGoogleSe
             ProfileResponse = profileResponse
         });
     }
+
+    public async Task<IResult> RevokeTokenAsync(string? token)
+    {
+        if (string.IsNullOrWhiteSpace(token))
+        {
+            return Results.BadRequest(new
+            {
+                Message = "Please provide a valid token",
+            });
+        }
+        
+        using var httpClient = new HttpClient();
+        
+        var requestContent = new FormUrlEncodedContent([
+            new KeyValuePair<string, string>("token", token),
+        ]);
+
+        var response = await httpClient.PostAsync(
+            GoogleSettings.REVOKE_TOKEN_ENDPOINT, requestContent);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Error revoking token: {response.StatusCode} {errorContent}");
+        }
+        
+        var responseContent = await response.Content.ReadAsStringAsync();
+        return Results.Ok(new
+        {
+            Response = responseContent,
+            Message = "Revoked"
+        });
+    }
 }

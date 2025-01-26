@@ -27,3 +27,8 @@ Accept: application/json
 Authorization: Bearer {{BearerToken}}
 
 ###
+
+GET {{GoogleOAuthPrototype_Application_HostAddress}}/api/revoke-token?token=1//0h_UMpj3iYtmBCgYIARAAGBESNwF-L9IroTATbHNJkncDDIgFXAq0IxFMgLSZDTHUfSD-dtQL6czil8r4IjwRP3SKJrE-p4_zDy0
+Accept: application/json
+
+###

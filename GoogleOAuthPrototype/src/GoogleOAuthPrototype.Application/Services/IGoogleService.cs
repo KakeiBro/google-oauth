@@ -11,4 +11,6 @@ public interface IGoogleService
     Task<IResult> GoogleTokensAsync(string code = GoogleSettings.EMPTY_STRING);
     
     Task<IResult> GetUserDataAsync(HttpRequest request);
+    
+    Task<IResult> RevokeTokenAsync(string? token);
 }
