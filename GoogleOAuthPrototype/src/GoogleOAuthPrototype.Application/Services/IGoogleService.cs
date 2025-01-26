@@ -13,4 +13,6 @@ public interface IGoogleService
     Task<IResult> GetUserDataAsync(HttpRequest request);
     
     Task<IResult> RevokeTokenAsync(string? token);
+    
+    Task<IResult> RefreshTokenAsync(string? refreshToken);
 }

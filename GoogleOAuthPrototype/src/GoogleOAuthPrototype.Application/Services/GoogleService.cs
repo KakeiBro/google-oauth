@@ -128,4 +128,41 @@ public class GoogleService(IOptions<GoogleAuthConfig> configuration) : IGoogleSe
             Message = "Revoked"
         });
     }
+
+    public async Task<IResult> RefreshTokenAsync(string? refreshToken)
+    {
+        if (string.IsNullOrWhiteSpace(refreshToken))
+        {
+            return Results.BadRequest(new
+            {
+                Message = "Please provide a valid token",
+            });
+        }
+        
+        using var httpClient = new HttpClient();
+        
+        var requestContent = new FormUrlEncodedContent([
+            new KeyValuePair<string, string>("refresh_token", refreshToken),
+            new KeyValuePair<string, string>("client_id", configuration.Value.ClientId),
+            new KeyValuePair<string, string>("client_secret", configuration.Value.ClientSecret),
+            new KeyValuePair<string, string>("grant_type", "refresh_token"),
+        ]);
+
+        var response = await httpClient.PostAsync(
+            GoogleSettings.REFRESH_TOKEN_ENDPOINT, requestContent);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            var errorContent = await response.Content.ReadAsStringAsync();
+            throw new Exception($"Error revoking token: {response.StatusCode} {errorContent}");
+        }
+        
+        var responseContent = await response.Content.ReadAsStringAsync();
+        return Results.Ok(new
+        {
+            Response = JsonSerializer.Deserialize<RefreshTokenResponse>(
+                responseContent, AppSerializationOptions.GoogleConventionOptions),
+            Message = "Revoked"
+        });
+    }
 }

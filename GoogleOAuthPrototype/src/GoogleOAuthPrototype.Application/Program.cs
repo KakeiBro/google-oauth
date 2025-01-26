@@ -30,5 +30,7 @@ app.MapGet("api/get-user-data",
     async (HttpRequest request, IGoogleService service) => await service.GetUserDataAsync(request));
 app.MapGet("api/revoke-token",
     async (IGoogleService service, string? token = null) => await service.RevokeTokenAsync(token));
+app.MapGet("api/refresh-token",
+    async (IGoogleService service, string? refreshToken = null) => await service.RefreshTokenAsync(refreshToken));
 
 app.Run();
